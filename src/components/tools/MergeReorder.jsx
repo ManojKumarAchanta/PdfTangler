@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { usePdf } from '../../context/pdfContext'
-import { handleDragStart, handleDragEnd, handleDragOver, handleDrop } from '../../utils/dragDrop'
+import { handleDragStart, handleDragEnd, handleDragOver, handleDrop, handleTouchStart, handleTouchMove, handleTouchEnd } from '../../utils/dragDrop'
 import { strings } from '../../config/appStrings'
 import { icons } from '../../config/iconConfig'
 import ViewToggle from '../shared/ViewToggle'
@@ -57,11 +57,15 @@ const MergeReorder = ({ onConfirm, onCancel }) => {
               <div
                 key={`${file.name}-${index}`}
                 draggable
+                data-drag-index={index}
                 onDragStart={(e) => handleDragStart(e, index, setDraggedIndex)}
                 onDragEnd={(e) => handleDragEnd(e, setDraggedIndex)}
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, index, draggedIndex, handleReorder)}
-                className={`relative ${draggedIndex === index ? 'opacity-50' : ''}`}
+                onTouchStart={(e) => handleTouchStart(e, index, setDraggedIndex)}
+                onTouchMove={(e) => handleTouchMove(e, setDraggedIndex)}
+                onTouchEnd={(e) => handleTouchEnd(e, setDraggedIndex, handleReorder)}
+                className={`relative touch-none ${draggedIndex === index ? 'opacity-50' : ''}`}
                 aria-label={`File ${index + 1} of ${files.length}: ${file.name}. Drag to reorder.`}
                 role="listitem"
               >
@@ -78,11 +82,15 @@ const MergeReorder = ({ onConfirm, onCancel }) => {
               <div
                 key={`${file.name}-${index}`}
                 draggable
+                data-drag-index={index}
                 onDragStart={(e) => handleDragStart(e, index, setDraggedIndex)}
                 onDragEnd={(e) => handleDragEnd(e, setDraggedIndex)}
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, index, draggedIndex, handleReorder)}
-                className={`flex items-center gap-3 p-3 border border-gray-200 rounded-md hover:border-gray-300 transition-all cursor-move group ${draggedIndex === index ? 'opacity-50' : ''
+                onTouchStart={(e) => handleTouchStart(e, index, setDraggedIndex)}
+                onTouchMove={(e) => handleTouchMove(e, setDraggedIndex)}
+                onTouchEnd={(e) => handleTouchEnd(e, setDraggedIndex, handleReorder)}
+                className={`flex items-center gap-3 p-3 border border-gray-200 rounded-md hover:border-gray-300 transition-all cursor-move group touch-none ${draggedIndex === index ? 'opacity-50' : ''
                   }`}
                 aria-label={`File ${index + 1} of ${files.length}: ${file.name}. Drag to reorder.`}
                 role="listitem"
