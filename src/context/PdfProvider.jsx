@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { defaultTool } from '../config/appConfig'
 import { PdfContext } from './pdfContext'
+import { mergePdfs } from '../utils/mergePdfs'
 
 export function PdfProvider({ children }) {
   const [files, setFiles] = useState([])
@@ -42,6 +43,33 @@ export function PdfProvider({ children }) {
     })
   }
 
+  const handleDirectMerge = async () => {
+    if (files.length < 2) {
+      setError('Please select at least two PDF files')
+      return
+    }
+
+    setIsMerging(true)
+    setError(null)
+
+    try {
+      const mergedPdfBytes = await mergePdfs(files)
+      const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'merged.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      setError(err.message || 'Failed to merge PDFs. Please try again.')
+    } finally {
+      setIsMerging(false)
+    }
+  }
+
   const value = {
     files,
     isMerging,
@@ -59,7 +87,8 @@ export function PdfProvider({ children }) {
     setSidebarOpen,
     setSidebarCollapsed,
     setCurrentModule,
-    setShowReorder
+    setShowReorder,
+    handleDirectMerge
   }
 
   return (

@@ -32,6 +32,7 @@ export const strings = {
       continueToReorder: 'Reorder Files',
       merging: 'Merging...'
     },
+    mergeNow: 'Merge Now',
     errors: {
       minFiles: 'Please select at least two PDF files',
       mergeFailed: 'Failed to merge PDFs. Please try again.'
