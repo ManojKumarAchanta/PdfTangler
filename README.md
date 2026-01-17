@@ -20,6 +20,7 @@ Live demo: https://pdftangler.pages.dev
 - No tracking
 - No hidden limits
 
+
 All PDF processing happens **client-side**, so your files **never leave your device**.
 
 ---
