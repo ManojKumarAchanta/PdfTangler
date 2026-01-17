@@ -5,8 +5,11 @@
 It lets users **merge PDFs** and **reorder PDF pages** — entirely **in the browser**.
 
 ❗ PdfTangler is **NOT** a Python tool, **NOT** a Streamlit app, and **NOT** a PDF data-extraction library.  
-It is a **frontend-only React application** with no backend.
 
+PdfTangler is a **frontend-only React application** web application for basic PDF utilities.
+It runs fully in the browser and is NOT a Python or Streamlit tool.
+
+Live demo: https://pdftangler.pages.dev
 ---
 
 ## 🔒 Privacy First by Design
