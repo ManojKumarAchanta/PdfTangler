@@ -26,16 +26,16 @@ All PDF processing happens **client-side**, so your files **never leave your dev
 ---
 ##  Features
 
-- 📄 Merge multiple PDFs in any custom order
-- 🔀 Reorder pages inside a PDF
-- 🔐 100% client-side processing
-- ⚡ Fast and lightweight
-- 🧘 No login, no tracking, no friction
-- 💻 Works fully in the browser
+-  Merge multiple PDFs in any custom order
+-  Reorder pages inside a PDF
+-  100% client-side processing
+-  Fast and lightweight
+-  No login, no tracking, no friction
+-  Works fully in the browser
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **React.js**
 - **JavaScript**
@@ -51,11 +51,11 @@ No server-side processing.
 
 ## Live Demo
 
-👉 https://tools.fusepdf.me
+ https://tools.fusepdf.me
 
 ---
 
-## 📦 Getting Started (Local Setup)
+##  Getting Started (Local Setup)
 
 No environment variables.  
 No backend services.
@@ -75,7 +75,7 @@ npm run dev
 
 http://localhost:5173
 
-## 🧠 How It Works
+##  How It Works
 
 PdfTangler uses the pdf-lib JavaScript library to read, modify, and generate PDFs directly in the browser.
 
