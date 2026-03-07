@@ -14,7 +14,7 @@ import { icons } from "../../config/iconConfig";
 import ViewToggle from "../shared/ViewToggle";
 import FileItem from "../FileItem";
 
-const MergeReorder = ({ onConfirm, onCancel }) => {
+const MergeReorder = ({ onConfirm, onCancel, isMerging }) => {
   const { files, removeFile, reorderFile } = usePdf();
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [viewMode, setViewMode] = useState("grid");
@@ -46,11 +46,25 @@ const MergeReorder = ({ onConfirm, onCancel }) => {
                 <div className="flex justify-center">
                   <button
                     onClick={onConfirm}
-                    className="px-6 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors font-medium cursor-pointer"
+                    disabled={isMerging}
+                    className={`px-6 py-2 text-sm rounded-md transition-colors font-medium ${isMerging ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-gray-900 text-white hover:bg-gray-800 cursor-pointer"}`}
                     type="button"
-                    aria-label="Merge PDF files and download"
+                    aria-label={
+                      isMerging
+                        ? "Merging PDFs"
+                        : "Merge PDF files and download"
+                    }
                   >
-                    {strings.merge.reorder.confirm}
+                    {isMerging ? (
+                      <span className="flex items-center gap-2">
+                        <div className="w-4 h-4" aria-hidden="true">
+                          {icons.spinner}
+                        </div>
+                        <span>{strings.merge.reorder.merging}</span>
+                      </span>
+                    ) : (
+                      strings.merge.reorder.confirm
+                    )}
                   </button>
                 </div>
               </div>
@@ -180,11 +194,23 @@ const MergeReorder = ({ onConfirm, onCancel }) => {
         </button>
         <button
           onClick={onConfirm}
-          className="px-6 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors font-medium cursor-pointer"
+          disabled={isMerging}
+          className={`px-6 py-2 text-sm rounded-md transition-colors font-medium ${isMerging ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-gray-900 text-white hover:bg-gray-800 cursor-pointer"}`}
           type="button"
-          aria-label="Merge PDF files and download"
+          aria-label={
+            isMerging ? "Merging PDFs" : "Merge PDF files and download"
+          }
         >
-          {strings.merge.reorder.confirm}
+          {isMerging ? (
+            <span className="flex items-center gap-2">
+              <div className="w-4 h-4" aria-hidden="true">
+                {icons.spinner}
+              </div>
+              <span>{strings.merge.reorder.merging}</span>
+            </span>
+          ) : (
+            strings.merge.reorder.confirm
+          )}
         </button>
       </div>
     </div>
